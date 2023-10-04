@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quizz - Connexion{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if error %}
+            <div class="alert alert-danger mt-4">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        {# read and display just one flash mesage type #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <h1>Formulaire de connexion</h1>
+        <div class=" d-flex flex-column align-items-center">
+            <div class="w-25">
+                <form action="{{ path('security.login') }}" method="post" name="login">
+                    <div class="form-group">
+                        <label for="username" class="form-label mt-4">Adresse Email</label>
+                        <input type="email" class="form-control" name="_username" id="username" value="{{ last_username }}" placeholder="exemeple@symrecipe.fr">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label mt-4">Mot de passe</label>
+                        <input type="password" class="form-control" name ="_password" id="password" placeholder="********">
+                    </div>
+                    <button class="btn btn-primary mt-4" type="submit">
+                        Se connecter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

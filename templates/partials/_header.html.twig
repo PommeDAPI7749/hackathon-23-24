@@ -1,0 +1,59 @@
+<div class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{path('home.index')}}">Accueil</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="{{ path('app.quizz')}}">
+                                Quizz
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="{{ path('app.recap')}}">
+                                Recap
+                            </a>
+                        </li>
+                   
+                    {%  if app.user %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ path('user.edit', {id : app.user.id}) }}">Modifier mes informations</a>
+                                <a class="dropdown-item" href="{{ path('user.edit.password', {id : app.user.id}) }}">Modifier mot de passe</a>
+                                {% if 'ROLE_ADMIN' in app.user.roles %}
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">Administration</a>
+                                {% endif %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('security.logout') }}">Déconnexion</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ path('security.login') }}">
+                                Se connecter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ path('security.registration') }}">
+                                S'inscrire
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
