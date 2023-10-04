@@ -26,7 +26,7 @@
                    
                     {%  if app.user %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.fullName }}</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ path('user.edit', {id : app.user.id}) }}">Modifier mes informations</a>
                                 <a class="dropdown-item" href="{{ path('user.edit.password', {id : app.user.id}) }}">Modifier mot de passe</a>
