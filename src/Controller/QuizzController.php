@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Quizz;
 use App\Repository\QuizzRepository;
 use App\Repository\UserRepository;
-use App\Service\QuizzService;
+use App\Services\QuizzService;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Security;
@@ -71,8 +71,15 @@ class QuizzController extends AbstractController
     }
     
     #[Route('/quizz/{id}', name: 'app.quizz.submit', methods: ['POST'])]
-    public function submit(Request $request) {
-        dd($_POST);
+    public function submit($id, Request $request, QuizzRepository $quizzRepository) {
+        $quizz = $quizzRepository->findOneBy(['id'=>$id]);
+        $score = 0;
+        foreach ($quizz->getData() as $index => $question) {
+            if ($question->correct_answer == $request->request->get($index)) {
+                $score++;
+            };
+        }
+        dd($score);
     }
 
 

@@ -10,11 +10,13 @@
     <form method="post" action="{{ path("app.quizz.submit", {id: quizz.id}) }}">
         {% for question in quizz.data %}
             {% set question_index = loop.index0 %}
-            <h2>{{ question.question }}</h2>
+            <fieldset>
+            <legend>{{ question.question }}</legend>
                 {% for response in question.answers %}
-                    <input type="checkbox" id="{{question_index}}-{{loop.index0}}" value="{{response}}">
+                    <input type="radio" name="{{question_index}}" value="{{loop.index0}}">
                     <label for="{{question_index}}-{{loop.index0}}"> {{response}}</label><br>
                 {% endfor %}
+            </fieldset>
         {% endfor %}
 
         <input type="submit" value="Submit">
