@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Quizz;
+use App\Repository\UserRepository;
 use App\Service\QuizzService;
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuizzController extends AbstractController
 {
     #[Route('/quizz', name: 'app.quizz')]
-    public function index(EntityManagerInterface $manager): Response
+    public function index(UserRepository $userRepo, EntityManagerInterface $manager): Response
     {
         $quizz = new Quizz;
         $quizz->setDate(new DateTime());
@@ -53,7 +55,12 @@ class QuizzController extends AbstractController
         ."\n    }"
         ."\n]");
         $quizz->setData($data);
+        $user = $this->getUser();
+        $user = $userRepo->findOneBy(['id' => $user->getId()]);
+        $quizz->setUser($user);
+        $user->addQuizz($quizz);
         $manager->persist($quizz);
+        $manager->persist($user);
         $manager->flush();
 
         return $this->render('quizz/index.html.twig', [

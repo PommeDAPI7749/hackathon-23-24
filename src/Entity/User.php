@@ -53,10 +53,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Quizz::class)]
+    private Collection $Quizz;
+
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->Quizz = new ArrayCollection();
     }
 
     /**
@@ -177,6 +181,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quizz>
+     */
+    public function getQuizz(): Collection
+    {
+        return $this->Quizz;
+    }
+
+    public function addQuizz(Quizz $quizz): static
+    {
+        if (!$this->Quizz->contains($quizz)) {
+            $this->Quizz->add($quizz);
+            $quizz->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizz(Quizz $quizz): static
+    {
+        if ($this->Quizz->removeElement($quizz)) {
+            // set the owning side to null (unless already changed)
+            if ($quizz->getUser() === $this) {
+                $quizz->setUser(null);
+            }
+        }
 
         return $this;
     }

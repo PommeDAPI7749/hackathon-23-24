@@ -4,6 +4,7 @@
 
 {% block body %}
 <div class="example-wrapper">
+    {{ dump(quizz.user)}}
     {% for question in quizz.data %}
         <li>{{ question.question }}</li>
         {% for reponse in question.answers %}

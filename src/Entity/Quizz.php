@@ -26,6 +26,9 @@ class Quizz
     #[ORM\Column(nullable: true)]
     private ?float $wrongAnswer = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Quizz')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Quizz
     public function setWrongAnswer(?float $wrongAnswer): static
     {
         $this->wrongAnswer = $wrongAnswer;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
