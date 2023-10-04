@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Quizz;
+use App\Repository\QuizzRepository;
 use App\Repository\UserRepository;
 use App\Service\QuizzService;
 use DateTime;
@@ -64,8 +65,16 @@ class QuizzController extends AbstractController
         $manager->flush();
 
         return $this->render('quizz/index.html.twig', [
-            'controller_name' => 'QuizzController',
             'quizz' => $quizz
+        ]);
+    }
+    #[Route('/quizz/show/{id}', name: 'app.quizz.show')]
+   public function show($id, QuizzRepository $quizzRepository){
+        $quizz = $quizzRepository->findOneBy(['id'=>$id]);
+        dd($quizz);
+        return $this->render('quizz/show.html.twig', [
+            'quizz' => $quizz
+
         ]);
     }
 }
