@@ -8,7 +8,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    
+                    {%  if app.user %}
                         <li class="nav-item">
                             <a
                                 class="nav-link"
@@ -23,7 +23,7 @@
                                 Recap
                             </a>
                         </li>
-                   
+                   {%  endif %}
                     {%  if app.user %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.fullName }}</a>
