@@ -72,7 +72,7 @@ class QuizzController extends AbstractController
     
     #[Route('/quizz/{id}', name: 'app.quizz.submit', methods: ['POST'])]
     public function submit(Request $request) {
-        dd($request);
+        dd($_POST);
     }
 
 
