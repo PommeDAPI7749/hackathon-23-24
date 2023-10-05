@@ -49,7 +49,7 @@
                         <td>
                             <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">
                             {{ quizz.isIsFinished 
-                                ? quizz.goodAnswer ~ ' réponses justes / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
+                                ? quizz.goodAnswer ~ ' réponses juste(s) / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
                                 : 'Quizz inachevé, finir le quizz...'}}
                             </a>
                         </td>
