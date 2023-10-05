@@ -14,7 +14,7 @@
                             <span class="btn btn-success">{{ answer }}</span>
                         {% else %}
                             {% if answerIndex == question.correct_answer %}
-                                <span class="btn btn-success">{{ answer }}</span>
+                                <span class="btn btn-light text-success">{{ answer }}</span>
                             {% elseif answerIndex == quizz.userAnswers[questionIndex] %}
                                 <span class="btn btn-danger">{{ answer }}</span>
                             {% else %}

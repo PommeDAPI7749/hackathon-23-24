@@ -56,6 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Quizz::class)]
     private Collection $Quizz;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $score = 0;
+
 
     public function __construct()
     {
@@ -211,6 +214,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $quizz->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getScore(): ?float
+    {
+        return $this->score;
+    }
+
+    public function setScore(?float $score): static
+    {
+        $this->score = $score;
 
         return $this;
     }

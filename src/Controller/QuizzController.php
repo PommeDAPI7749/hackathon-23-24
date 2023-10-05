@@ -7,8 +7,6 @@ use App\Repository\QuizzRepository;
 use App\Repository\UserRepository;
 use App\Services\QuizzService;
 use DateTime;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,10 +82,13 @@ class QuizzController extends AbstractController
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
         $answers = [0,0];
         $userAnswers = [];
+        $user = $quizz->getUser();
+        $score = $user->getScore();
         foreach ($quizz->getData() as $index => $question) {
             $userAnswers[$index] = $request->request->get($index);
             if ($question->correct_answer == $request->request->get($index)) {
                 $answers[0]++;
+                $score += 1;
             } else {
                 $answers[1]++;
             }
@@ -96,7 +97,9 @@ class QuizzController extends AbstractController
         $quizz->setGoodAnswer($answers[0]);
         $quizz->setWrongAnswer($answers[1]);
         $quizz->setUserAnswers($userAnswers);
+        $user->setScore($score);
         $manager->persist($quizz);
+        $manager->persist($user);
         $manager->flush();
 
         $this->addFlash(

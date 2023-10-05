@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classement{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <h1 class="text-warning">Classement</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">Nom Utilisateur</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for userClassement, user in users %}
+                    <tr>
+                        <td>{{ userClassement + 1 }}</td>
+                        <td>{{ user.fullName }}</td>
+                        <td>{{ user.score == null ? 0 : user.score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
