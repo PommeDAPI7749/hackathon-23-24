@@ -44,9 +44,15 @@
             <tbody>
                 {% for quizz in quizzs %}
                     <tr>
-                        <td><a href="{{ path('app.quizz.show', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
+                        <td><a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
                         <td>{{ quizz.date|date("d/m/y") }}</td>
-                        <td>{{ quizz.isIsFinished ? quizz.goodAnswer ~ ' / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) : 'Quizz inacheve ...'}}</td>
+                        <td>
+                            <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">
+                            {{ quizz.isIsFinished 
+                                ? quizz.goodAnswer ~ ' réponses justes / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
+                                : 'Quizz inachevé, finir le quizz...'}}
+                            </a>
+                        </td>
 
 
                     </tr>
