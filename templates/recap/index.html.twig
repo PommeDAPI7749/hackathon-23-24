@@ -4,6 +4,11 @@
 
 {% block body %}
     <div class="container mt-4">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h1 class="text-warning">Récapitulation du Quiz</h1>
 
         {# <h2>Score Total : {{ quizzs.score }}</h2> #}
