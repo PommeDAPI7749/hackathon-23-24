@@ -46,7 +46,7 @@
                     <tr>
                         <td><a href="{{ path('app.quizz.show', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
                         <td>{{ quizz.date|date("d/m/y") }}</td>
-                        {# <td>{{ quizz.goodAnswer is null and quizz.wrongAnswer is null ? quizz.goodAnswer ~ ' / ' ~ quizz.wrongAnswer : quizz.goodAnswer ~ 'bonnes reponses / ' ~ quizz.goodAnswer + quizz.wrongAnswer }}</td> #}
+                        <td>{{ quizz.isIsFinished ? quizz.goodAnswer ~ ' / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) : 'Quizz inacheve ...'}}</td>
 
 
                     </tr>

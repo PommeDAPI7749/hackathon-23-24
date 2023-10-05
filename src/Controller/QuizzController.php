@@ -73,13 +73,17 @@ class QuizzController extends AbstractController
     #[Route('/quizz/{id}', name: 'app.quizz.submit', methods: ['POST'])]
     public function submit($id, Request $request, EntityManagerInterface $manager, QuizzRepository $quizzRepository) {
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
+        $answers = [0,0];
         foreach ($quizz->getData() as $index => $question) {
             if ($question->correct_answer == $request->request->get($index)) {
-                $quizz->setGoodAnswer($quizz->getGoodAnswer() + 1);
+                $answers[0]++;
             } else {
-                $quizz->setWrongAnswer($quizz->getWrongAnswer() + 1);
+                $answers[1]++;
             }
         }
+        $quizz->setIsFinished(true);
+        $quizz->setGoodAnswer($answers[0]);
+        $quizz->setWrongAnswer($answers[1]);
         
         $manager->persist($quizz);
         $manager->flush();
