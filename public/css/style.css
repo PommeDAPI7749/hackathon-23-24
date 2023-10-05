@@ -1,0 +1,20 @@
+.backgroundnavimage{
+    background-image: url("../assets/img/nav-test.png");
+    background-size: cover;
+}
+
+.backgroungimage{
+    padding-top: 10.5rem;
+    padding-bottom: 6rem;
+    text-align: center;
+    color: #fff;
+    background-image: url("../assets/img/header-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.test{
+    width: 500px;
+    background-color: black;
+}
