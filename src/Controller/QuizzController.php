@@ -83,23 +83,19 @@ class QuizzController extends AbstractController
     public function submit($id, Request $request, EntityManagerInterface $manager, QuizzRepository $quizzRepository) {
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
         $answers = [0,0];
-        $data = [];
+        $userAnswers = [];
         foreach ($quizz->getData() as $index => $question) {
-            // $userAnswers[$index] = $request->request->get($index);
-            $question->userAnswer = $request->request->get($index);
+            $userAnswers[$index] = $request->request->get($index);
             if ($question->correct_answer == $request->request->get($index)) {
                 $answers[0]++;
             } else {
                 $answers[1]++;
             }
-            $data[$index] = $question;
         }
-
         $quizz->setIsFinished(true);
         $quizz->setGoodAnswer($answers[0]);
         $quizz->setWrongAnswer($answers[1]);
-        $quizz->setData($data);
-        
+        $quizz->setUserAnswers($userAnswers);
         $manager->persist($quizz);
         $manager->flush();
 

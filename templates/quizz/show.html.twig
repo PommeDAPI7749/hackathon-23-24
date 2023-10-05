@@ -5,24 +5,28 @@
 {% block body %}
     <div class="container mt-4">
         <h1 class="text-warning">Récapitulation du Quizz {{ quizz.id }}</h1>
-        {{dump(quizz)}}
         <div>
-            {% for question in quizz.data %}
+            {% for questionIndex, question in quizz.data %}
                 <div class="mt-2">
-                    Question : {{ question.question }}
+                    {{ question.question }}
                     {% for answerIndex, answer in question.answers %}
-                        {% if answerIndex == question.correct_answer %}
+                        {% if quizz.userAnswers[questionIndex] == question.correct_answer and quizz.userAnswers[questionIndex] == answerIndex%}
                             <span class="btn btn-success">{{ answer }}</span>
                         {% else %}
-                            <span class="btn btn-danger">{{ answer }}</span>
+                            {% if answerIndex == question.correct_answer %}
+                                <span class="btn btn-success">{{ answer }}</span>
+                            {% elseif answerIndex == quizz.userAnswers[questionIndex] %}
+                                <span class="btn btn-danger">{{ answer }}</span>
+                            {% else %}
+                                <span class="btn btn-light">{{ answer }}</span>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
             {% endfor %}
         </div>
         <div>
-        <h4> Votre score est de : {{quizz.goodAnswer}} / 5 ! </h4>
-
-       </div>
+            <h4> Votre score est de : {{quizz.goodAnswer}} / 5 ! </h4>
+        </div>
     </div>
 {% endblock %}
