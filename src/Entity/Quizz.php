@@ -29,6 +29,9 @@ class Quizz
     #[ORM\ManyToOne(inversedBy: 'Quizz')]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isFinished = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Quizz
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(?bool $isFinished): static
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }
