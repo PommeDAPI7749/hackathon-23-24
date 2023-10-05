@@ -21,39 +21,39 @@ class QuizzController extends AbstractController
         $quizz = new Quizz;
         $quizz->setDate(new DateTime());
         $quizzService = new QuizzService;
-        // $data = $quizzService->generateQuizzData();
-        $data = json_decode("["
-        ."\n    {"
-            ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
-            ."\n        \"answers\": ["
-            ."\n            \"Pluvieux\","
-            ."\n            \"Ensoleille\","
-            ."\n            \"Nuageux\","
-            ."\n            \"Orageux\""
-            ."\n        ],"
-            ."\n        \"correct_answer\": 1"
-            ."\n    },"
-            ."\n    {"
-                ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
-                ."\n        \"answers\": ["
-                ."\n            \"Pluvieux\","
-                ."\n            \"Ensoleille\","
-                ."\n            \"Nuageux\","
-                ."\n            \"Orageux\""
-                ."\n        ],"
-                ."\n        \"correct_answer\": 1"
-                ."\n    },"
-                ."\n    {"
-                    ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
-                    ."\n        \"answers\": ["
-                    ."\n            \"Pluvieux\","
-                    ."\n            \"Ensoleille\","
-        ."\n            \"Nuageux\","
-        ."\n            \"Orageux\""
-        ."\n        ],"
-        ."\n        \"correct_answer\": 1"
-        ."\n    }"
-        ."\n]");
+        $data = $quizzService->generateQuizzData();
+        // $data = json_decode("["
+        // ."\n    {"
+        //     ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
+        //     ."\n        \"answers\": ["
+        //     ."\n            \"Pluvieux\","
+        //     ."\n            \"Ensoleille\","
+        //     ."\n            \"Nuageux\","
+        //     ."\n            \"Orageux\""
+        //     ."\n        ],"
+        //     ."\n        \"correct_answer\": 1"
+        //     ."\n    },"
+        //     ."\n    {"
+        //         ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
+        //         ."\n        \"answers\": ["
+        //         ."\n            \"Pluvieux\","
+        //         ."\n            \"Ensoleille\","
+        //         ."\n            \"Nuageux\","
+        //         ."\n            \"Orageux\""
+        //         ."\n        ],"
+        //         ."\n        \"correct_answer\": 1"
+        //         ."\n    },"
+        //         ."\n    {"
+        //             ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
+        //             ."\n        \"answers\": ["
+        //             ."\n            \"Pluvieux\","
+        //             ."\n            \"Ensoleille\","
+        // ."\n            \"Nuageux\","
+        // ."\n            \"Orageux\""
+        // ."\n        ],"
+        // ."\n        \"correct_answer\": 1"
+        // ."\n    }"
+        // ."\n]");
         $quizz->setData($data);
         $user = $this->getUser();
         $user = $userRepo->findOneBy(['id' => $user->getId()]);
@@ -115,7 +115,6 @@ class QuizzController extends AbstractController
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
         return $this->render('quizz/show.html.twig', [
             'quizz' => $quizz
-
         ]);
     }
 }

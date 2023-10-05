@@ -6,7 +6,7 @@ class QuizzService
 {
     public function generateQuizzData()
     {
-        $subject = "Imagine dragon";
+        $subject = "music";
         $prompt = "Please create a quizz with 5 questions in french about ".$subject
         ."\nYou must give me the data following this exemple :"
    
@@ -50,7 +50,7 @@ class QuizzService
         
         $headers = array(
             "Content-Type: application/json",
-            "Authorization: Bearer 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"
+            "Authorization: Bearer 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"
         );
         
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -70,7 +70,7 @@ class QuizzService
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-
+        
         return json_decode($response["choices"][0]["text"]);
     }
 }
