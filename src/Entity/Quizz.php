@@ -21,10 +21,10 @@ class Quizz
     private ?array $data = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $goodAnswer = null;
+    private ?float $goodAnswer = 0;
 
     #[ORM\Column(nullable: true)]
-    private ?float $wrongAnswer = null;
+    private ?float $wrongAnswer = 0;
 
     #[ORM\ManyToOne(inversedBy: 'Quizz')]
     private ?User $user = null;

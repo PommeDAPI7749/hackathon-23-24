@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container mt-4">
+
         {% for message in app.flashes('success') %}
             <div class="alert alert-success mt-4">
                 {{ message }}
@@ -43,9 +44,9 @@
             <tbody>
                 {% for quizz in quizzs %}
                     <tr>
-                        <td>{{ quizz.id }}</td>
+                        <td><a href="{{ path('app.quizz.show', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
                         <td>{{ quizz.date|date("d/m/y") }}</td>
-                        <td>{{ quizz.goodAnswer is null and quizz.wrongAnswer is null ? quizz.goodAnswer ~ ' / ' ~ quizz.wrongAnswer : '' }}</td>
+                        {# <td>{{ quizz.goodAnswer is null and quizz.wrongAnswer is null ? quizz.goodAnswer ~ ' / ' ~ quizz.wrongAnswer : quizz.goodAnswer ~ 'bonnes reponses / ' ~ quizz.goodAnswer + quizz.wrongAnswer }}</td> #}
 
 
                     </tr>
