@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -8,8 +8,12 @@
             <div class="col-md-6 bg-dark border rounded-4" style="width:780px">
                 <div class="header">
                     <h1 class="text-light">Testez vos connaissances musicales !</h1>
-                    <p class="text-light" style="margin-top:20px;margin-bottom:20px">Veuillez vous connecter pour commencer.</p>
-                    <bouton href="#" class="d-grid gap-2 col-6 mx-auto border border-light btn btn-lg btn btn-outline-light py-2" style="margin-bottom:20px;">....</bouton>
+                    {%  if app.user %}
+                        <a href="{{ path('app.quizz') }}" class="d-grid gap-2 col-6 mx-auto border border-light btn btn-lg btn btn-outline-light py-2" style="margin-bottom:20px;">Lancer un quizz</a>
+                    {% else %}
+                        <p class="text-light" style="margin-top:20px;margin-bottom:20px">Veuillez vous connecter pour commencer.</p>
+                        <a href="{{ path('security.login') }}" class="d-grid gap-2 col-6 mx-auto border border-light btn btn-lg btn btn-outline-light py-2" style="margin-bottom:20px;">Se connecter</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
