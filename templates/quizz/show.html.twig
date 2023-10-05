@@ -1,11 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello QuizzController!{% endblock %}
+{% block title %}Récapitulation du Quizz {{ quizz.id }}{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    {% for question in quizz.data %}
-        <li>{{ question.question }}</li>
-    {% endfor %}
-</div>
+    <div class="container mt-4">
+        <h1 class="text-warning">Récapitulation du Quizz {{ quizz.id }}</h1>
+        {{dump(quizz)}}
+        <div>
+            {% for question in quizz.data %}
+                <div class="mt-2">
+                    Question : {{ question.question }}
+                    {% for answerIndex, answer in question.answers %}
+                        {% if answerIndex == question.correct_answer %}
+                            <span class="btn btn-success">{{ answer }}</span>
+                        {% else %}
+                            <span class="btn btn-danger">{{ answer }}</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+        <h4> Votre score est de : {{quizz.goodAnswer}} / 5 ! </h4>
+
+       </div>
+    </div>
 {% endblock %}

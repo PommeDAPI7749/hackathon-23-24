@@ -70,23 +70,50 @@ class QuizzController extends AbstractController
         ]);
     }
     
-    #[Route('/quizz/{id}', name: 'app.quizz.submit', methods: ['POST'])]
-    public function submit($id, Request $request, QuizzRepository $quizzRepository) {
+    #[Route('/quizz/resume/{id}', name: 'app.quizz.finish')]
+    public function resume($id, Request $request, EntityManagerInterface $manager, QuizzRepository $quizzRepository) {
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
-        $score = 0;
+
+        return $this->render('quizz/index.html.twig', [
+            'quizz' => $quizz
+        ]);
+    }
+
+    #[Route('/quizz/{id}', name: 'app.quizz.submit', methods: ['POST'])]
+    public function submit($id, Request $request, EntityManagerInterface $manager, QuizzRepository $quizzRepository) {
+        $quizz = $quizzRepository->findOneBy(['id'=>$id]);
+        $answers = [0,0];
+        $data = [];
         foreach ($quizz->getData() as $index => $question) {
+            // $userAnswers[$index] = $request->request->get($index);
+            $question->userAnswer = $request->request->get($index);
             if ($question->correct_answer == $request->request->get($index)) {
-                $score++;
-            };
+                $answers[0]++;
+            } else {
+                $answers[1]++;
+            }
+            $data[$index] = $question;
         }
-        dd($score);
+
+        $quizz->setIsFinished(true);
+        $quizz->setGoodAnswer($answers[0]);
+        $quizz->setWrongAnswer($answers[1]);
+        $quizz->setData($data);
+        
+        $manager->persist($quizz);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Votre reponsee au quizz a bien ete enregistree, voici un recapittulatif de vos 5 derniers resultats.'
+        );
+        return $this->redirectToRoute('app.recap');
     }
 
 
     #[Route('/quizz/show/{id}', name: 'app.quizz.show')]
     public function show($id, QuizzRepository $quizzRepository){
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
-        dd($quizz);
         return $this->render('quizz/show.html.twig', [
             'quizz' => $quizz
 

@@ -4,6 +4,12 @@
 
 {% block body %}
     <div class="container mt-4">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h1 class="text-warning">Récapitulation du Quiz</h1>
 
         {# <h2>Score Total : {{ quizzs.score }}</h2> #}
@@ -38,9 +44,15 @@
             <tbody>
                 {% for quizz in quizzs %}
                     <tr>
-                        <td>{{ quizz.id }}</td>
+                        <td><a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
                         <td>{{ quizz.date|date("d/m/y") }}</td>
-                        <td>{{ quizz.goodAnswer is null and quizz.wrongAnswer is null ? quizz.goodAnswer ~ ' / ' ~ quizz.wrongAnswer : '' }}</td>
+                        <td>
+                            <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">
+                            {{ quizz.isIsFinished 
+                                ? quizz.goodAnswer ~ ' réponses juste(s) / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
+                                : 'Quizz inachevé, finir le quizz...'}}
+                            </a>
+                        </td>
 
 
                     </tr>

@@ -13,7 +13,7 @@
             <fieldset>
             <legend>{{ question.question }}</legend>
                 {% for response in question.answers %}
-                    <input type="radio" name="{{question_index}}" value="{{loop.index0}}">
+                    <input type="radio" name="{{question_index}}" value="{{loop.index0}}" required>
                     <label for="{{question_index}}-{{loop.index0}}"> {{response}}</label><br>
                 {% endfor %}
             </fieldset>

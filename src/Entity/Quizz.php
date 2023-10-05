@@ -21,13 +21,16 @@ class Quizz
     private ?array $data = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $goodAnswer = null;
+    private ?float $goodAnswer = 0;
 
     #[ORM\Column(nullable: true)]
-    private ?float $wrongAnswer = null;
+    private ?float $wrongAnswer = 0;
 
     #[ORM\ManyToOne(inversedBy: 'Quizz')]
     private ?User $user = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isFinished = false;
 
     public function getId(): ?int
     {
@@ -90,6 +93,18 @@ class Quizz
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(?bool $isFinished): static
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }
