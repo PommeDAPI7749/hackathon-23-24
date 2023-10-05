@@ -32,6 +32,9 @@ class Quizz
     #[ORM\Column(nullable: true)]
     private ?bool $isFinished = false;
 
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $userAnswers = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Quizz
     public function setIsFinished(?bool $isFinished): static
     {
         $this->isFinished = $isFinished;
+
+        return $this;
+    }
+
+    public function getUserAnswers(): ?array
+    {
+        return $this->userAnswers;
+    }
+
+    public function setUserAnswers(?array $userAnswers): static
+    {
+        $this->userAnswers = $userAnswers;
 
         return $this;
     }
