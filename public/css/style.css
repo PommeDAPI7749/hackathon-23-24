@@ -1,5 +1,5 @@
 .backgroundnavimage{
-    background-image: url("../assets/img/nav-test.png");
+    background-image: url("public/assets/test.jpg");
     background-size: cover;
 }
 
@@ -8,10 +8,8 @@
     padding-bottom: 6rem;
     text-align: center;
     color: #fff;
-    background-image: url("../assets/img/header-bg.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-image: url("../assets/fond-3.avif");
+    background-repeat: repeat;
 }
 
 .test{
