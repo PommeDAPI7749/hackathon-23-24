@@ -21,7 +21,17 @@
             <tbody>
                 {% for userClassement, user in users %}
                     <tr>
-                        <td>{{ userClassement + 1 }}</td>
+                        <td>
+                            {% if userClassement + 1 == 1 %}
+                                🥇
+                            {% elseif userClassement + 1 == 2 %}
+                                🥈
+                            {% elseif userClassement + 1 == 3 %}
+                                🥉
+                            {% else %}
+                                {{userClassement + 1 }}
+                            {% endif %}
+                        </td>
                         <td>{{ user.fullName }}</td>
                         <td>{{ user.score == null ? 0 : user.score }}</td>
                     </tr>
