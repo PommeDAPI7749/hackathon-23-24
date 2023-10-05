@@ -7,7 +7,7 @@ class QuizzService
     public function generateQuizzData()
     {
         $subject = "music";
-        $prompt = "Please create a quizz with 5 questions in french about ".$subject
+        $prompt = "Please create a quizz with 5 questions in french about ". $subject . " and be original please"
         ."\nYou must give me the data following this exemple :"
    
         ."["
