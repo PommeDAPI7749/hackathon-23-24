@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Quizz;
+use App\Repository\CategorieRepository;
 use App\Repository\QuizzRepository;
 use App\Repository\UserRepository;
 use App\Services\QuizzService;
@@ -15,13 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuizzController extends AbstractController
 {
-    #[Route('/quizz', name: 'app.quizz')]
-    public function index(UserRepository $userRepo, EntityManagerInterface $manager): Response
+    #[Route('/quizz/categorie/{categoryId}', name: 'app.quizz')]
+    public function index(UserRepository $userRepo, EntityManagerInterface $manager, CategorieRepository $categorieRepository, $categoryId): Response
     {
         $quizz = new Quizz;
         $quizz->setDate(new DateTime());
+        $category = $categorieRepository->find($categoryId);
         $quizzService = new QuizzService;
-        $data = $quizzService->generateQuizzData();
+        $data = $quizzService->generateQuizzData($category->getName());
         // $data = json_decode("["
         // ."\n    {"
         //     ."\n        \"question\": \"Quel temps fait il aujourd'hui ?\","
@@ -125,7 +127,6 @@ class QuizzController extends AbstractController
         
         return $this->redirectToRoute('app.recap');
     }
-
 
     #[Route('/quizz/show/{id}', name: 'app.quizz.show')]
     public function show($id, QuizzRepository $quizzRepository){

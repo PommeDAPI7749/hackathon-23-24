@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix catégorie{% endblock %}
+
+{% block body %}
+    <h2 class="text-warning mt-5">Choisissez une categorie de quizz</h2>
+    <ul class="btn btn-light w-auto m-auto">
+        <li class="nav-item dropdown">  
+            <a class="nav-link dropdown-toggle text-center" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Choix catégorie</a>
+            <div class="dropdown-menu">
+                {% for categorie in categories %}
+                    <a class="dropdown-item" href="{{ path('app.quizz', {categoryId: categorie.id}) }}">{{ categorie.name }}</a>
+                {% endfor %}
+            </div>
+        </li>
+    </ul>
+{% endblock %}
