@@ -31,7 +31,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('app.recap', {allQuizzs: 1}) }}">Afficher tous les quizs</a>
+            <a href="{{ path('app.recap', {allQuizzs: 1}) }}" class="btn btn-light">Afficher tous les quizs</a>
         {% else %}
             <h2 class="text-warning">Vous n'avez pas encore joué, cliquez sur l'onglet Quizz pour démarer</h2>
         {% endif %}
