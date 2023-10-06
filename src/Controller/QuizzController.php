@@ -71,6 +71,13 @@ class QuizzController extends AbstractController
     #[Route('/quizz/resume/{id}', name: 'app.quizz.finish')]
     public function resume($id, Request $request, EntityManagerInterface $manager, QuizzRepository $quizzRepository) {
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
+        if ($quizz->isIsFinished()) {
+            $this->addFlash(
+                'warning',
+                'Ce quiz est déjà terminé.'
+            );
+            return $this->redirect('/quizz/show/'.$id);
+        }
 
         return $this->render('quizz/index.html.twig', [
             'quizz' => $quizz
@@ -80,6 +87,14 @@ class QuizzController extends AbstractController
     #[Route('/quizz/{id}', name: 'app.quizz.submit', methods: ['POST'])]
     public function submit($id, Request $request, EntityManagerInterface $manager, QuizzRepository $quizzRepository) {
         $quizz = $quizzRepository->findOneBy(['id'=>$id]);
+        if ($quizz->isIsFinished()) {
+            $this->addFlash(
+                'warning',
+                'Ce quiz est déjà terminé.'
+            );
+            return $this->redirect('/quizz/show/'.$id);
+        }
+
         $answers = [0,0];
         $userAnswers = [];
         $user = $quizz->getUser();

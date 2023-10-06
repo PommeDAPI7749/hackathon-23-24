@@ -8,14 +8,24 @@
         {% for question in quizz.data %}
             {% set question_index = loop.index0 %}
             <fieldset>
-            <legend>{{ question.question }}</legend>
+                <legend>{{ question.question }}</legend>
                 {% for response in question.answers %}
                     <input type="radio" name="{{question_index}}" value="{{loop.index0}}" required>
-                    <label for="{{question_index}}-{{loop.index0}}"> {{response}}</label><br>
+                    <label for="{{question_index}}-{{loop.index0}}">{{response}}</label><br>
                 {% endfor %}
             </fieldset>
         {% endfor %}
         <input type="submit" value="Submit">
-    </form> 
+    </form>
 </div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        window.history.replaceState({}, "", "{{ path('home.index') }}");
+        location.reload();
+        this.submit();
+    });
+</script>
 {% endblock %}
