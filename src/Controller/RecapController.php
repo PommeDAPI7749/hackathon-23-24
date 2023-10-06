@@ -30,6 +30,7 @@ class RecapController extends AbstractController
 
         return $this->render('recap/index.html.twig', [
             'quizzs' => $quizzs,
+            'allQuizzs' => $allQuizzs
         ]);
     }
 }

@@ -5,8 +5,11 @@
 {% block body %}
     <div class="container mt-4">
         {% if quizzs != [] %}
-            <h1 class="text-warning">Récapitulation du Quiz</h1>
-            <h2 class="text-warning">Récapitulatif des 5 Dernières Parties :</h2>
+            {% if allQuizzs is null %}
+                <h2 class="text-warning">Récapitulatif des 5 Dernières Parties</h2>
+            {% else %}
+                <h2 class="text-warning">Récapitulatif de tous les Quizs</h2>
+            {% endif %}
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
@@ -37,7 +40,11 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('app.recap', {allQuizzs: 1}) }}" class="btn btn-light">Afficher tous les quizs</a>
+            {% if allQuizzs is null %}
+                <a href="{{ path('app.recap', {allQuizzs: 1}) }}" class="btn btn-light">Afficher tous les quizs</a>
+            {% else %}
+                <a href="{{ path('app.recap') }}" class="btn btn-light">Afficher les 5 dernier quizzs</a>
+            {% endif %}
         {% else %}
             <h2 class="text-warning">Vous n'avez pas encore joué, cliquez sur l'onglet Quizz pour démarer</h2>
         {% endif %}
