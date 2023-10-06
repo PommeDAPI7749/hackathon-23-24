@@ -32,7 +32,7 @@
                                 {{userClassement + 1 }}
                             {% endif %}
                         </td>
-                        <td>{{ user.fullName }}</td>
+                        <td>{{ user.pseudo != null ? user.pseudo : user.fullName }}</td>
                         <td>{{ user.score == null ? 0 : user.score }}</td>
                     </tr>
                 {% endfor %}
