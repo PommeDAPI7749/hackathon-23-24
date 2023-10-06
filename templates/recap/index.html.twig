@@ -13,18 +13,24 @@
                         <th scope="col">Partie</th>
                         <th scope="col">Date</th>
                         <th scope="col">Score</th>
+                        <th scope="col" style="width: 30px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for quizz in quizzs %}
                         <tr>
-                            <td><a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
+                            <td>{{ quizz.id }}</td>
                             <td>{{ quizz.date|date("d/m/y") }}</td>
                             <td>
-                                <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">
                                 {{ quizz.isIsFinished 
                                     ? quizz.goodAnswer ~ ' réponses juste(s) / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
-                                    : 'Quizz inachevé, finir le quizz...'}}
+                                    : 'Quizz inachevé' }} 
+                            </td>
+                            <td>
+                                <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}" class="btn {{ quizz.isIsFinished ? 'text-success' : 'text-warning'}}" style="text-decoration: none; color: inherit; display: block; width: 100%; height: 100%;">
+                                {{ quizz.isIsFinished 
+                                    ? '📝' 
+                                    : '🏁' }} 
                                 </a>
                             </td>
                         </tr>
