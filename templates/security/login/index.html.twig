@@ -11,11 +11,6 @@
         {% endif %}
 
         {# read and display just one flash mesage type #}
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">
-                {{ message }}
-            </div>
-        {% endfor %}
         <h1>Formulaire de connexion</h1>
         <div class=" d-flex flex-column align-items-center">
             <div class="w-25">

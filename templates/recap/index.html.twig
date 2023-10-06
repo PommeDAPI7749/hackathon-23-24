@@ -4,61 +4,36 @@
 
 {% block body %}
     <div class="container mt-4">
-
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">
-                {{ message }}
-            </div>
-        {% endfor %}
-        <h1 class="text-warning">Récapitulation du Quiz</h1>
-
-        {# <h2>Score Total : {{ quizzs.score }}</h2> #}
-
-        {# <h2 class="text-warning">Réponses Correctes/Incorrectes :</h2>
-        <ul class="list-group"> #}
-            {# {% for question in quizData.questions %}
-                <li class="list-group-item">
-                    Question : {{ question.text }}
-                    {% if question.correct %}
-                        <span class="text-success">Réponse Correcte</span>
-                    {% else %}
-                        <span class="text-danger">Réponse Incorrecte</span>
-                    {% endif %}
-                </li>
-            {% endfor %} #}
-        {# </ul> #}
-
-        {# <h2>Résumé des Résultats :</h2> #}
-        {# <p>Vous avez {{ quizData.correctCount }} réponses correctes et {{ quizData.incorrectCount }} réponses incorrectes. Continuez à vous améliorer !</p> #}
-
-        <h2 class="text-warning">Récapitulatif des 5 Dernières Parties :</h2>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Partie</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Score</th>
-                   
-                </tr>
-            </thead>
-            <tbody>
-                {% for quizz in quizzs %}
+        {% if quizzs != [] %}
+            <h1 class="text-warning">Récapitulation du Quiz</h1>
+            <h2 class="text-warning">Récapitulatif des 5 Dernières Parties :</h2>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
                     <tr>
-                        <td><a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
-                        <td>{{ quizz.date|date("d/m/y") }}</td>
-                        <td>
-                            <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">
-                            {{ quizz.isIsFinished 
-                                ? quizz.goodAnswer ~ ' réponses juste(s) / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
-                                : 'Quizz inachevé, finir le quizz...'}}
-                            </a>
-                        </td>
-
-
+                        <th scope="col">Partie</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Score</th>
+                    
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    {% for quizz in quizzs %}
+                        <tr>
+                            <td><a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">{{ quizz.id }}</a></td>
+                            <td>{{ quizz.date|date("d/m/y") }}</td>
+                            <td>
+                                <a href="{{ quizz.isFinished ? path('app.quizz.show', {id: quizz.id}) : path('app.quizz.finish', {id: quizz.id}) }}">
+                                {{ quizz.isIsFinished 
+                                    ? quizz.goodAnswer ~ ' réponses juste(s) / ' ~ (quizz.wrongAnswer + quizz.goodAnswer) 
+                                    : 'Quizz inachevé, finir le quizz...'}}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2 class="text-warning">Vous n'avez pas encore joué, cliquez sur l'onglet Quizz pour démarer</h2>
+        {% endif %}
     </div>
 {% endblock %}

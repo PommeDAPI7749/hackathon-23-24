@@ -27,6 +27,21 @@
             {% include "partials/_header.html.twig" %}
         {% endblock %}
         <div class="container-fluid" style="min-height: calc(100vh - 94px);">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger mt-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% block body %}
             {% endblock %}
         </div>

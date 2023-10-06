@@ -4,11 +4,6 @@
 
 {% block body %}
     <div class="container mt-4">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">
-                {{ message }}
-            </div>
-        {% endfor %}
         <h1 class="text-warning">Classement</h1>
         <table class="table table-bordered">
             <thead class="thead-dark">
