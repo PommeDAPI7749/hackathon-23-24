@@ -104,7 +104,7 @@ class QuizzController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Votre reponsee au quizz a bien ete enregistree, voici un recapittulatif de vos 5 derniers resultats.'
+            'Votre réponse au quiz a bien été enregistrée, voici un récapitulatif de vos 5 derniers résultats.'
         );
         return $this->redirectToRoute('app.recap');
     }
