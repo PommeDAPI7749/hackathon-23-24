@@ -1,12 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello QuizzController!{% endblock %}
+{% block title %}Quizz{% endblock %}
 
 {% block body %}
 <div class="example-wrapper">
-
-    {# {{ dump(quizz.user)}} #}
-
     <form method="post" action="{{ path("app.quizz.submit", {id: quizz.id}) }}">
         {% for question in quizz.data %}
             {% set question_index = loop.index0 %}
@@ -18,9 +15,7 @@
                 {% endfor %}
             </fieldset>
         {% endfor %}
-
         <input type="submit" value="Submit">
     </form> 
-
 </div>
 {% endblock %}

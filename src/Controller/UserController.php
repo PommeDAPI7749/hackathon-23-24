@@ -31,21 +31,18 @@ class UserController extends AbstractController
         if ($tokenStorage->getToken()->getUser() == $choosenUser) {
             $form = $this->createForm(UserType::class, $choosenUser);
             $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid())
-            {
-                if ($hasher->isPasswordValid($choosenUser, $form->getData()->getPlainPassword()))
-                {
+            if ($form->isSubmitted() && $form->isValid()) {
+                if ($hasher->isPasswordValid($choosenUser, $form->getData()->getPlainPassword())) {
                     $user = $form->getData();
                     $manager->persist($user);
                     $manager->flush();
                     $this->addFlash('success', 'Utilisateur modifié !');
                     return $this->redirectToRoute('home.index');
-                }
-                else
-                {
+                } else {
                     $this->addFlash('warning', 'Mot de passe incorect');
                 }
             }
+
         } else {
             $this->addFlash('error', 'Vous ne disposez pas des autorisations');
             return $this->redirectToRoute('home.index');
@@ -64,8 +61,7 @@ class UserController extends AbstractController
             $form = $this->createForm(UserPasswordType::class);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                if ($hasher->isPasswordValid($choosenUser, $form->getData()['plainPassword']))
-                {
+                if ($hasher->isPasswordValid($choosenUser, $form->getData()['plainPassword'])) {
                     $choosenUser->setCreatedAt(new \DateTimeImmutable());
                     $choosenUser->setPlainPassword(
                         $form->getData()['newPassword']
@@ -75,14 +71,16 @@ class UserController extends AbstractController
 
                     $this->addFlash('success', 'Mot de passe modifié !');
                     return $this->redirectToRoute('home.index');
-                }else{
+                } else {
                     $this->addFlash('warning', 'Mote de passe incorrect ');
                 }
             }
         } else {
             $this->addFlash('error', 'Vous ne disposez pas des autorisations');
+            
             return $this->redirectToRoute('home.index');
         }
+
         return $this->render('user/edit_password.html.twig', ['form' => $form]);
     }
 }

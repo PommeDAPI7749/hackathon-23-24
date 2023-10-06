@@ -1,8 +1,3 @@
-.backgroundnavimage{
-    background-image: url("public/assets/test.jpg");
-    background-size: cover;
-}
-
 .backgroungimage{
     padding-top: 10.5rem;
     padding-bottom: 6rem;
@@ -10,9 +5,4 @@
     color: #fff;
     background-image: url("../assets/fond-3.jpg");
     background-repeat: repeat;
-}
-
-.test{
-    width: 500px;
-    background-color: black;
 }

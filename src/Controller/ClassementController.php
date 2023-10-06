@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ClassementController extends AbstractController
@@ -20,6 +19,7 @@ class ClassementController extends AbstractController
                                 ->orderBy('CASE WHEN u.score IS NULL THEN 1 ELSE 0 END, u.score', 'DESC')
                                 ->getQuery()
                                 ->getResult();
+                                
         return $this->render('classement/index.html.twig', [
             'users' => $users
         ]);

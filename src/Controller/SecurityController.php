@@ -21,11 +21,13 @@ class SecurityController extends AbstractController
             "error" => $authenticationUtils->getLastAuthenticationError()
         ]);
     }
+
     #[Route('/deconnexion', 'security.logout')]
     public function logout()
     {
         // Nothing to do here
     }
+
     #[Route('/inscription', name: 'security.registration', methods: ['GET', 'POST'])]
     public function registration(Request $request, EntityManagerInterface $manager):Response
     {
@@ -51,5 +53,4 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
 }

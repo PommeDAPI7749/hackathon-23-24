@@ -28,8 +28,7 @@
         public function encodePassword(User $user){
             if ($user->getPlainPassword() === null ){
                 return;
-            }
-            else{
+            } else {
                 $user->setPassword(
                     $this->hasher->hashPassword(
                         $user,

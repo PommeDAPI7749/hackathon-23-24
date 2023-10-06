@@ -93,6 +93,7 @@ class QuizzController extends AbstractController
                 $answers[1]++;
             }
         }
+
         $quizz->setIsFinished(true);
         $quizz->setGoodAnswer($answers[0]);
         $quizz->setWrongAnswer($answers[1]);
@@ -106,6 +107,7 @@ class QuizzController extends AbstractController
             'success',
             'Votre réponse au quiz a bien été enregistrée, voici un récapitulatif de vos 5 derniers résultats.'
         );
+        
         return $this->redirectToRoute('app.recap');
     }
 
