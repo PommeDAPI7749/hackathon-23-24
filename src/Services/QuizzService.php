@@ -45,6 +45,7 @@ class QuizzService
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/completions');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         
