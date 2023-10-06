@@ -16,6 +16,7 @@ class ClassementController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         $users = $userRepository->createQueryBuilder('u')
+                                ->innerJoin('u.Quizz', 'q')
                                 ->orderBy('CASE WHEN u.score IS NULL THEN 1 ELSE 0 END, u.score', 'DESC')
                                 ->getQuery()
                                 ->getResult();
