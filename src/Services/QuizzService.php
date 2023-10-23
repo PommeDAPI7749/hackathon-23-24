@@ -50,7 +50,7 @@ class QuizzService
         
         $headers = array(
             "Content-Type: application/json",
-            "Authorization: Bearer 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"
+            "Authorization: Bearer ".getenv("CHATGPT_API_Key")
         );
         
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
